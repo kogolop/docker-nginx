@@ -1,4 +1,4 @@
 FROM nginx:latest
 
 
-RUN echo " I am here"
+RUN echo " I am here today"
