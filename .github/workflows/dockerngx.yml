@@ -9,8 +9,13 @@ on:
     branches: [ "main" ]
 
 jobs:
+<<<<<<< HEAD
   push-to-dockerhub:
     runs-on:  pk-self-hosted-runner1
+=======
+  build:
+    runs-on: pk-self-hosted-runner1
+>>>>>>> 414674719b8c2677ce21c35040627f5aa082b41f
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
