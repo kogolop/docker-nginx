@@ -52,4 +52,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/pk-docker-ngx:latest
+        tags: ${{ secrets.ECR_REPO }}/pk-docker-ngx:latest
