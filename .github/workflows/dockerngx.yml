@@ -10,7 +10,7 @@ on:
 
 jobs:
   push-to-dockerhub:
-    runs-on: self-hosted
+    runs-on: pk-self-hosted-runner1
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USER }}/pk-docker-ngx:latest
 
   push-to-ecr:
-    runs-on: self-hosted
+    runs-on: pk-self-hosted-runner1
     steps:
     - name: Checkout code
       uses: actions/checkout@v1
