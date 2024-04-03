@@ -43,6 +43,9 @@ jobs:
     - name: Login to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
 
+    - name: Login Docker to ECR
+      run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REPO }}
+
     - name: Build, tag, and push image to Amazon ECR
       uses: docker/build-push-action@v2
       with:
