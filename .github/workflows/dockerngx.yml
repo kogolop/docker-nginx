@@ -74,5 +74,5 @@ jobs:
           file: ./Dockerfile
           push: true
           #tags: ${{ secrets.PRODUCTION_ECR_REPO }}/pk-docker-ngx:production-latest
-          tags: ${{ secrets.PRODUCTION_ECR_REPO }}.dkr.ecr.${{ secrets.PRODUCTION_AWS_REGION }}.amazonaws.com/pk-docker-ngx:production-latest
+          tags: ${{ secrets.PRODUCTION_ECR_REPO }}.dkr.ecr.${{ secrets.PRODUCTION_AWS_REGION }}/pk-docker-ngx:production-latest
 
