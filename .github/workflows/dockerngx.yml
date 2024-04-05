@@ -40,7 +40,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.STAGING_ECR_REPO }}/pk-docker-ngx:staging-latest
-
+          
   deploy-to-production:
     runs-on: self-hosted
     if: github.ref == 'refs/heads/main'
