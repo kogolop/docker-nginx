@@ -26,11 +26,11 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USER }}/pk-docker-ngx:staging-latest
       - name: Configure AWS ECR credentials for Staging
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/amazon-ecr-login@v2
         with:
           aws-access-key-id: ${{ secrets.STAGING_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.STAGING_AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1 # Hardcoded AWS region for Staging
+          aws-region: us-west-1 
       - name: Login Docker to Amazon ECR for Staging
         run: aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin ${{ secrets.STAGING_ECR_REPO }}
       - name: Build, tag, and push image to Amazon ECR for Staging
