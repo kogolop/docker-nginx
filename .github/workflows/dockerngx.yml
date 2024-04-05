@@ -38,7 +38,7 @@ jobs:
 
       - name: Login Docker to Amazon ECR for Staging
         run: |
-          aws ecr get-login-password --region ${{ secrets.STAGING_AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.STAGING_AWS_ACCESS_KEY_ID }}.dkr.ecr.${{ secrets.STAGING_AWS_REGION }}.amazonaws.com
+           aws ecr get-login-password --region ${{ secrets.STAGING_AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.STAGING_ECR_REPO }}
 
       - name: Build, tag, and push image to Amazon ECR for Staging
         uses: docker/build-push-action@v2
@@ -46,7 +46,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.STAGING_AWS_ACCESS_KEY_ID }}.dkr.ecr.${{ secrets.STAGING_AWS_REGION }}.amazonaws.com/pk-docker-ngx:staging-latest
+          tags: ${{ secrets.STAGING_ECR_REPO }}/pk-docker-ngx:staging-latest
 
   deploy-to-production:
     runs-on: self-hosted
@@ -79,7 +79,7 @@ jobs:
 
       - name: Login Docker to Amazon ECR for Production
         run: |
-          aws ecr get-login-password --region ${{ secrets.PRODUCTION_AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.PRODUCTION_AWS_ACCESS_KEY_ID }}.dkr.ecr.${{ secrets.PRODUCTION_AWS_REGION }}.amazonaws.com
+          aws ecr get-login-password --region ${{ secrets.PRODUCTION_AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.PRODUCTION_ECR_REPO }}
 
       - name: Build, tag, and push image to Amazon ECR for Production
         uses: docker/build-push-action@v2
@@ -87,4 +87,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.PRODUCTION_AWS_ACCESS_KEY_ID }}.dkr.ecr.${{ secrets.PRODUCTION_AWS_REGION }}.amazonaws.com/pk-docker-ngx:production-latest
+          tags: ${{ secrets.PRODUCTION_ECR_REPO }}/pk-docker-ngx:production-latest
