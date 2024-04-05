@@ -1,5 +1,5 @@
 name: Deploy NGINX on Docker and ECR in Staging and Production
-
+ 
 on:
   push:
     branches:
