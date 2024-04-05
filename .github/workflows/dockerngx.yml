@@ -30,18 +30,22 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
+          aws-region: us-west-1
       - name: Configure AWS ECR credentials for Staging
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
       - name: Login Docker to Amazon ECR for Staging
         env:
           ECR_REGISTRY: 866934333672.dkr.ecr.us-west-1.amazonaws.com
           ECR_REPOSITORY: pk-docker-ngx
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_TAG .
 
       - name: Build, tag, and push image to Amazon ECR for Staging
         uses: docker/build-push-action@v2
