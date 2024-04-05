@@ -9,6 +9,7 @@ on:
 jobs:
   deploy-to-staging:
     runs-on: self-hosted
+    environment: staging
     if: github.ref == 'refs/heads/develop'
     steps:
       - name: Checkout code
